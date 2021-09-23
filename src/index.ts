@@ -34,6 +34,9 @@ export class Stage {
     this.canvas.addEventListener('mousedown', this.handleCreator(ActionType.Down));
     this.canvas.addEventListener('mouseup', this.handleCreator(ActionType.Up));
     this.canvas.addEventListener('mousemove', this.handleCreator(ActionType.Move));
+    this.canvas.addEventListener('click', (e) => {
+      console.log('xxxxxxx', e)
+    });
 
     this.shapes = new Set();
     this.ctxList = [this.osCtx];
@@ -46,13 +49,14 @@ export class Stage {
     this.shapes.add(id);
     this.ctxList.push(shape.getMyCtx(this.initWidth, this.initHeight))
     shape.draw(this.ctx, this.osCtx);
+    console.log('xxxxxxxxx', this.shapes)
   }
 
   private handleCreator = (type: ActionType) => (evt: MouseEvent) => {
     const x = evt.offsetX;
     const y = evt.offsetY;
     const ids = this.hitJudge(x, y);
-    this.eventSimulator.addAction({ type, ids }, evt);
+    this.eventSimulator.emit({ type, ids }, evt);
   };
 
   /**

@@ -9,6 +9,7 @@ export enum ActionType {
   Down = 'DOWN',
   Up = 'Up',
   Move = 'MOVE',
+  Click = 'Click'
 }
 
 export default class EventSimulator {
@@ -21,39 +22,31 @@ export default class EventSimulator {
   private lastDownId = '';
   private lastMoveId = '';
 
-  addAction(action: Action, evt: MouseEvent) : void {
+  emit(action: Action, evt: MouseEvent) : void {
     const { type, ids } = action;
-    // mousemove
-    if (type === ActionType.Move) {
-      this.fire(ids, EventNames.mousemove, evt);
-    }
-
-    // mouseover
-    // mouseenter
-    if (type === ActionType.Move && (!this.lastMoveId || this.lastMoveId !== ids[0])) {
-      this.fire(ids, EventNames.mouseenter, evt);
-      this.fire([this.lastMoveId], EventNames.mouseleave, evt);
-    }
-
-    // mousedown
-    if (type === ActionType.Down) {
-      this.fire(ids, EventNames.mousedown, evt);
-    }
-
-    // mouseup
-    if (type === ActionType.Up) {
-      this.fire(ids, EventNames.mouseup, evt);
-    }
-
-    // click
-    if (type === ActionType.Up && this.lastDownId === ids[0]) {
-      this.fire(ids, EventNames.click, evt);
-    }
-
-    if (type === ActionType.Move) {
-      this.lastMoveId = action.ids[0];
-    } else if (type === ActionType.Down) {
-      this.lastDownId = action.ids[0];
+    console.log('=======', type, ids)
+    switch (type) {
+      case ActionType.Move:
+        if (!this.lastMoveId || this.lastMoveId !== ids[0]) {
+          this.fire([this.lastMoveId], EventNames.mouseleave, evt);
+        } else {
+          // mouseover
+          this.fire(ids, EventNames.mousemove, evt);
+        }
+        this.lastMoveId = action.ids[0];
+        break
+      case ActionType.Down:
+        this.fire(ids, EventNames.mousedown, evt);
+        this.lastDownId = action.ids[0];
+        break
+      case ActionType.Up:
+        this.fire(ids, EventNames.mouseup, evt);
+        break
+      case ActionType.Click:
+        this.fire(ids, EventNames.mouseenter, evt);
+        break
+      default:
+        console.log('default emit')
     }
   }
 
