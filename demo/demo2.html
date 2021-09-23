@@ -9,26 +9,23 @@
   <body>
     <canvas
       id="canvas"
-      style="width: 500px; height: 350px; border: 1px solid #000"
+      style="width: 500px; height: 500px; border: 1px solid #000"
+      width="500px"
+      height="500px"
     ></canvas>
     <script type="module">
       const canvas = document.getElementById("canvas");
       const ctx = canvas.getContext("2d");
 
-      // 填充三角形
-      ctx.beginPath();
-      ctx.moveTo(25, 25);
-      ctx.lineTo(105, 25);
-      ctx.lineTo(25, 105);
-      ctx.fill();
-
-      // 描边三角形
-      ctx.beginPath();
-      ctx.moveTo(125, 125);
-      ctx.lineTo(125, 45);
-      ctx.lineTo(45, 125);
-      ctx.closePath();
-      ctx.stroke();
+      ctx.fillStyle = "yellow";
+      ctx.fillRect(0, 0, 100, 100); // 原点处画了一个200*200的矩形
+      ctx.save();
+      ctx.translate(100, 100);
+      ctx.fillStyle = "blue";
+      ctx.fillRect(0, 0, 200, 200); // 原点处画了另一个200*200的矩形
+      ctx.restore();
+      ctx.fillStyle = "red";
+      ctx.fillRect(0, 0, 200, 200); // 在新原点的基础上，画一个200*200的矩形覆盖掉就原点处的矩形
     </script>
   </body>
 </html>

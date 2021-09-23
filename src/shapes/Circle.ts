@@ -19,6 +19,7 @@ export default class Circle extends Base {
     strokeColor: '',
     fillColor: '',
   };
+
   constructor(private props: RectProps) {
     super();
     this.drawProps.x = this.props.x || 0;
@@ -44,6 +45,7 @@ export default class Circle extends Base {
 
     const [r, g, b, a] = idToRgba(this.id);
 
+    // all
     osCtx.save();
     osCtx.beginPath();
     osCtx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
@@ -53,5 +55,16 @@ export default class Circle extends Base {
     osCtx.fill();
     osCtx.stroke();
     osCtx.restore();
+
+    // self
+    this.myCtx.save();
+    this.myCtx.beginPath();
+    this.myCtx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
+    this.myCtx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
+    this.myCtx.lineWidth = strokeWidth;
+    this.myCtx.arc(x, y, radius, 0, Math.PI * 2);
+    this.myCtx.fill();
+    this.myCtx.stroke();
+    this.myCtx.restore();
   }
 }

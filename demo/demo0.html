@@ -9,7 +9,9 @@
   <body>
     <canvas
       id="canvas"
-      style="width: 500px; height: 350px; border: 1px solid #000"
+      style="width: 500px; height: 500px; border: 1px solid #000"
+      width="500px"
+      height="500px"
     ></canvas>
     <script type="module">
       import { Stage, Rect, Circle, EventNames } from "../dist/bundle.esm.js";
@@ -34,9 +36,15 @@
       rect.on(EventNames.mousedown, () => console.log("rect mousedown"));
       rect.on(EventNames.mouseup, () => console.log("rect mouseup"));
       rect.on(EventNames.mouseenter, () => console.log("rect mouseenter"));
+      rect.on(EventNames.mouseleave, () => console.log("rect mouseleave!"));
+      rect.on(EventNames.click, () => console.log("rect click!!"));
+      rect.on(EventNames.mousemove, () => console.log("rect mousemove!!"));
 
       circle.on(EventNames.click, () => console.log("circle click!!"));
       circle.on(EventNames.mouseleave, () => console.log("circle mouseleave!"));
+      circle.on(EventNames.mousedown, () => console.log("circle mousedown!!"));
+      circle.on(EventNames.mouseenter, () => console.log("circle mouseenter!"));
+      circle.on(EventNames.mousemove, () => console.log("circle mousemove!"));
 
       stage.add(rect);
       stage.add(circle);

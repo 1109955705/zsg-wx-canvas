@@ -6,6 +6,8 @@ export interface Shape {
   getListeners(): { [name: string]: Listener[] };
 
   getId(): string;
+
+  getMyCtx(width: number, height: number): OffscreenCanvasRenderingContext2D;
 }
 
 export interface Listener {

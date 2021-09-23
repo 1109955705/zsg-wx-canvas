@@ -2,7 +2,7 @@ import { Listener, EventNames } from './shapes';
 
 export interface Action {
   type: ActionType;
-  id: string;
+  ids: string[];
 }
 
 export enum ActionType {
@@ -22,39 +22,38 @@ export default class EventSimulator {
   private lastMoveId = '';
 
   addAction(action: Action, evt: MouseEvent) : void {
-    const { type, id } = action;
-
+    const { type, ids } = action;
     // mousemove
     if (type === ActionType.Move) {
-      this.fire(id, EventNames.mousemove, evt);
+      this.fire(ids, EventNames.mousemove, evt);
     }
 
     // mouseover
     // mouseenter
-    if (type === ActionType.Move && (!this.lastMoveId || this.lastMoveId !== id)) {
-      this.fire(id, EventNames.mouseenter, evt);
-      this.fire(this.lastMoveId, EventNames.mouseleave, evt);
+    if (type === ActionType.Move && (!this.lastMoveId || this.lastMoveId !== ids[0])) {
+      this.fire(ids, EventNames.mouseenter, evt);
+      this.fire([this.lastMoveId], EventNames.mouseleave, evt);
     }
 
     // mousedown
     if (type === ActionType.Down) {
-      this.fire(id, EventNames.mousedown, evt);
+      this.fire(ids, EventNames.mousedown, evt);
     }
 
     // mouseup
     if (type === ActionType.Up) {
-      this.fire(id, EventNames.mouseup, evt);
+      this.fire(ids, EventNames.mouseup, evt);
     }
 
     // click
-    if (type === ActionType.Up && this.lastDownId === id) {
-      this.fire(id, EventNames.click, evt);
+    if (type === ActionType.Up && this.lastDownId === ids[0]) {
+      this.fire(ids, EventNames.click, evt);
     }
 
     if (type === ActionType.Move) {
-      this.lastMoveId = action.id;
+      this.lastMoveId = action.ids[0];
     } else if (type === ActionType.Down) {
-      this.lastDownId = action.id;
+      this.lastDownId = action.ids[0];
     }
   }
 
@@ -67,9 +66,15 @@ export default class EventSimulator {
     this.listenersMap[id] = listeners;
   }
 
-  fire(id: string, eventName: EventNames, evt: MouseEvent) : void {
-    if (this.listenersMap[id] && this.listenersMap[id][eventName]) {
-      this.listenersMap[id][eventName].forEach((listener) => listener(evt));
-    }
+  fire(ids: string[], eventName: EventNames, evt: MouseEvent) : void {
+    ids.forEach(id => {
+      if (this.listenersMap[id] && this.listenersMap[id][eventName]) {
+        this.listenersMap[id][eventName].forEach((listener) => listener(evt));
+      }
+    })
+    // const id = ids[0]
+    // if (this.listenersMap[id] && this.listenersMap[id][eventName]) {
+    //   this.listenersMap[id][eventName].forEach((listener) => listener(evt));
+    // }
   }
 }

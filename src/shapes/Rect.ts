@@ -47,6 +47,7 @@ export default class Rect extends Base {
 
     const [r, g, b, a] = idToRgba(this.id);
 
+    // all
     osCtx.save();
     osCtx.beginPath();
     osCtx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
@@ -55,5 +56,15 @@ export default class Rect extends Base {
     osCtx.fill();
     osCtx.stroke();
     osCtx.restore();
+
+    // self
+    this.myCtx.save();
+    this.myCtx.beginPath();
+    this.myCtx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
+    this.myCtx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
+    this.myCtx.rect(x, y, width, height);
+    this.myCtx.fill();
+    this.myCtx.stroke();
+    this.myCtx.restore();
   }
 }
