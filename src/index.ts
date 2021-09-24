@@ -65,10 +65,12 @@ export class Stage {
    * @param y
    */
   private hitJudge(x: number, y: number): string[] {
+
     const rgbaList = this.ctxList.map((ctx: OffscreenCanvasRenderingContext2D) => {
       return Array.from(ctx.getImageData(x * this.dpr, y * this.dpr, 1, 1).data)
     })
     const ids = rgbaList.map(rgba => rgbaToId(rgba as [number, number, number, number])).filter(id => this.shapes.has(id))    
+    console.log('xxxxxxxx', this.ctxList, Array.from(new Set(ids)))
     return Array.from(new Set(ids));
     // const rgba = Array.from(this.osCtx.getImageData(x * this.dpr, y * this.dpr, 1, 1).data);
 

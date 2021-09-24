@@ -24,7 +24,7 @@ export default class EventSimulator {
 
   emit(action: Action, evt: MouseEvent) : void {
     const { type, ids } = action;
-    console.log('=======', type, ids)
+    // console.log('=======', type, ids)
     switch (type) {
       case ActionType.Move:
         if (!this.lastMoveId || this.lastMoveId !== ids[0]) {

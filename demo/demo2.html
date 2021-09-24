@@ -17,15 +17,16 @@
       const canvas = document.getElementById("canvas");
       const ctx = canvas.getContext("2d");
 
-      ctx.fillStyle = "yellow";
-      ctx.fillRect(0, 0, 100, 100); // 原点处画了一个200*200的矩形
-      ctx.save();
-      ctx.translate(100, 100);
-      ctx.fillStyle = "blue";
-      ctx.fillRect(0, 0, 200, 200); // 原点处画了另一个200*200的矩形
-      ctx.restore();
       ctx.fillStyle = "red";
-      ctx.fillRect(0, 0, 200, 200); // 在新原点的基础上，画一个200*200的矩形覆盖掉就原点处的矩形
+      ctx.rect(0, 0, 100, 100); // 原点处画了一个200*200的矩形
+      ctx.fill();
+      console.log("=====", ctx.isPointInPath(20, 20));
+
+      ctx.beginPath();
+      ctx.fillStyle = "blue";
+      ctx.rect(100, 100, 200, 200); // 原点处画了另一个200*200的矩形
+      ctx.fill();
+      console.log("=====", ctx.isPointInPath(30, 30));
     </script>
   </body>
 </html>
