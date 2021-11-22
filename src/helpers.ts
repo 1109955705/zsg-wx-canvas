@@ -1,8 +1,8 @@
-export function idToRgba(id: string) {
+export function idToRgba(id: string): string[] {
   return id.split("-");
 }
 
-export function rgbaToId(rgba: [number, number, number, number]) {
+export function rgbaToId(rgba: [number, number, number, number]): string {
   return rgba.join("-");
 }
 

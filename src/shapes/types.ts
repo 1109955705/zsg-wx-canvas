@@ -1,4 +1,6 @@
 export interface Shape {
+  origin?: number[];
+
   draw(ctx: CanvasRenderingContext2D, osCtx: OffscreenCanvasRenderingContext2D): void;
 
   on(name: string, listener: Listener): void;
@@ -6,8 +8,6 @@ export interface Shape {
   getListeners(): { [name: string]: Listener[] };
 
   getId(): string;
-
-  getMyCtx(width: number, height: number): OffscreenCanvasRenderingContext2D;
 }
 
 export interface Listener {
@@ -15,7 +15,7 @@ export interface Listener {
 }
 
 export enum EventNames {
-  click = 'click',
+  mouseclick = 'mouseclick',
   mousedown = 'mousedown',
   mousemove = 'mousemove',
   mouseup = 'mouseup',

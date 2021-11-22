@@ -1,7 +1,7 @@
 import { idToRgba } from '../helpers';
 import Base from './Base';
 
-interface RectProps {
+interface TextProps {
   origin?: number[]
   x: number;
   y: number;
@@ -16,8 +16,8 @@ interface RectProps {
   fillColor?: string;
 }
 
-export default class Rect extends Base {
-  private drawProps: Required<RectProps> = {
+export default class Text extends Base {
+  private drawProps: Required<TextProps> = {
     origin: [0, 0],
     x: 0,
     y: 0,
@@ -31,7 +31,7 @@ export default class Rect extends Base {
     strokeColor: '',
     fillColor: '',
   };
-  constructor(private props: RectProps) {
+  constructor(private props: TextProps) {
     super();
     this.drawProps.x = this.props.x || 0;
     this.drawProps.y = this.props.y || 0;

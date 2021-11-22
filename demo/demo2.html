@@ -18,13 +18,15 @@
       const ctx = canvas.getContext("2d");
 
       ctx.fillStyle = "red";
+      ctx.save();
+      ctx.translate(10, 10);
       ctx.rect(0, 0, 100, 100); // 原点处画了一个200*200的矩形
       ctx.fill();
       console.log("=====", ctx.isPointInPath(20, 20));
-
+      ctx.restore();
       ctx.beginPath();
       ctx.fillStyle = "blue";
-      ctx.rect(100, 100, 200, 200); // 原点处画了另一个200*200的矩形
+      ctx.rect(0, 0, 200, 200); // 原点处画了另一个200*200的矩形
       ctx.fill();
       console.log("=====", ctx.isPointInPath(30, 30));
     </script>

@@ -19,8 +19,9 @@
       const stage = new Stage(canvas);
 
       const rect = new Rect({
-        x: 50,
-        y: 50,
+        origin: [10, 10],
+        x: 10,
+        y: 10,
         width: 250,
         height: 250,
         radius0: 20,
@@ -29,43 +30,49 @@
         radius3: 20,
         fillColor: "green",
       });
-
+      console.log("xxxxxx", rect);
       const circle = new Circle({
-        x: 200,
-        y: 200,
+        origin: [20, 20],
+        x: 100,
+        y: 100,
         radius: 100,
         fillColor: "red",
-      });
-
-      const rect1 = new Rect({
-        x: 150,
-        y: 150,
-        width: 80,
-        height: 80,
-        radius0: 20,
-        radius1: 20,
-        radius2: 20,
-        radius3: 20,
-        fillColor: "blue",
       });
 
       rect.on(EventNames.mousedown, () => console.log("rect mousedown"));
       rect.on(EventNames.mouseup, () => console.log("rect mouseup"));
       rect.on(EventNames.mouseenter, () => console.log("rect mouseenter"));
       rect.on(EventNames.mouseleave, () => console.log("rect mouseleave"));
-      rect.on(EventNames.click, () => console.log("rect click!!"));
+      rect.on(EventNames.mouseclick, () => console.log("rect click!!"));
       rect.on(EventNames.mousemove, () => console.log("rect mousemove"));
 
       circle.on(EventNames.mouseup, () => console.log("circle mouseup"));
       circle.on(EventNames.mousedown, () => console.log("circle mousedown"));
       circle.on(EventNames.mouseleave, () => console.log("circle mouseleave"));
       circle.on(EventNames.mouseenter, () => console.log("circle mouseenter"));
-      circle.on(EventNames.click, () => console.log("circle click"));
+      circle.on(EventNames.mouseclick, () => console.log("circle click"));
       circle.on(EventNames.mousemove, () => console.log("circle mousemove"));
 
       stage.add(rect);
       stage.add(circle);
-      stage.add(rect1);
+      // let a = 80;
+      // setInterval(() => {
+      //   a += 1;
+      //   const rect1 = new Rect({
+      //     origin: [0, 0],
+      //     x: a,
+      //     y: 80,
+      //     width: 80,
+      //     height: 80,
+      //     radius0: 20,
+      //     radius1: 20,
+      //     radius2: 20,
+      //     radius3: 20,
+      //     fillColor: "blue",
+      //   });
+      //   console.log("rect1", rect1);
+      //   stage.add(rect1);
+      // }, 100);
     </script>
   </body>
 </html>

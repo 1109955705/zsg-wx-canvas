@@ -1,5 +1,5 @@
 {
-  "name": "zsg-wx-canvas",
+  "name": "zsg-canvas",
   "version": "1.0.0",
   "description": "wx canvas",
   "main": "./src/index.ts",
